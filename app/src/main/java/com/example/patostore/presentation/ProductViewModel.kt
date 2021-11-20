@@ -3,14 +3,13 @@ package com.example.patostore.presentation
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.patostore.domain.Details
-import com.example.patostore.network.ProductService
+import com.example.patostore.network.Service
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
 
-class ProductViewModel (private val service: ProductService): ViewModel() {
+class ProductViewModel (private val service: Service): ViewModel() {
 
     var favorites = MutableLiveData(mutableListOf<String>())
     var productDetails = MutableLiveData<Details>()
@@ -63,9 +62,9 @@ class ProductViewModel (private val service: ProductService): ViewModel() {
 
 }
 
-class ProductViewModelFactory(private val service: ProductService): ViewModelProvider.Factory{
+class ProductViewModelFactory(private val service: Service): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(ProductService::class.java).newInstance(service)
+        return modelClass.getConstructor(Service::class.java).newInstance(service)
     }
 
 }

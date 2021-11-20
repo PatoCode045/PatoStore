@@ -5,16 +5,15 @@ package com.example.patostore.presentation
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.patostore.domain.Category
-import com.example.patostore.domain.Highlight
 import com.example.patostore.domain.HighlightApiResponse
 import com.example.patostore.domain.ProductApiResponse
-import com.example.patostore.network.ProductService
+import com.example.patostore.network.Service
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 
-class CategoryViewModel(private val service: ProductService ): ViewModel() {
+class CategoryViewModel(private val service: Service ): ViewModel() {
 
     var foundedCategory = MutableLiveData<Category?>()
     var highlightList = MutableLiveData<HighlightApiResponse>()
@@ -94,8 +93,8 @@ class CategoryViewModel(private val service: ProductService ): ViewModel() {
 
 }
 
-class CategoryViewModelFactory(private val service: ProductService): ViewModelProvider.Factory{
+class CategoryViewModelFactory(private val service: Service): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(ProductService::class.java).newInstance(service)
+        return modelClass.getConstructor(Service::class.java).newInstance(service)
     }
 }

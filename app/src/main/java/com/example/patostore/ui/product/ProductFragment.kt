@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.patostore.R
-import com.example.patostore.databinding.FragmentProductDetailsBinding
+import com.example.patostore.databinding.FragmentProductBinding
 import com.example.patostore.network.ProductService
 import com.example.patostore.presentation.ProductViewModel
 import com.example.patostore.presentation.ProductViewModelFactory
@@ -21,10 +21,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
+class ProductFragment : Fragment(R.layout.fragment_product) {
 
-    lateinit var binding: FragmentProductDetailsBinding
-    val args by navArgs<ProductDetailsFragmentArgs>()
+    lateinit var binding: FragmentProductBinding
+    val args by navArgs<ProductFragmentArgs>()
     val gson = Gson()
 
 
@@ -41,7 +41,7 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         Log.d("pato", "se cargo la lista: ${list}")
         viewModel.fetchFavoriteList(gson.fromJson<List<String>>(list, listType)?: listOf())
 
-        binding = FragmentProductDetailsBinding.bind(view)
+        binding = FragmentProductBinding.bind(view)
 
         viewModel.getDetails(args.id)
 

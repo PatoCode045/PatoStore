@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.patostore.domain.ProductApiResponse
-import com.example.patostore.network.ProductService
+import com.example.patostore.network.Service
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class FavoriteViewModel (private val service: ProductService): ViewModel() {
+class FavoriteViewModel (private val service: Service): ViewModel() {
 
     var favorites = mutableListOf<String>()
     var favoriteProductList = MutableLiveData<List<ProductApiResponse>>()
@@ -46,9 +46,9 @@ class FavoriteViewModel (private val service: ProductService): ViewModel() {
 
 }
 
-class FavoriteViewModelFactory(private val service: ProductService): ViewModelProvider.Factory{
+class FavoriteViewModelFactory(private val service: Service): ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(ProductService::class.java).newInstance(service)
+        return modelClass.getConstructor(Service::class.java).newInstance(service)
     }
 
 }

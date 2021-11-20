@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.example.patostore.ui.category.ProductListFragment"
+        android:name="com.example.patostore.ui.category.CategoryFragment"
         android:label="fragment_product_list"
-        tools:layout="@layout/fragment_product_list" >
+        tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/action_productListFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment" />
@@ -19,9 +19,9 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
-        android:name="com.example.patostore.ui.product.ProductDetailsFragment"
+        android:name="com.example.patostore.ui.product.ProductFragment"
         android:label="fragment_product_details"
-        tools:layout="@layout/fragment_product_details" >
+        tools:layout="@layout/fragment_product" >
         <argument
             android:name="id"
             app:argType="string" />

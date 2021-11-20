@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.patostore.R
-import com.example.patostore.databinding.FragmentProductListBinding
+import com.example.patostore.databinding.FragmentCategoryBinding
 import com.example.patostore.domain.ProductApiResponse
 import com.example.patostore.network.ProductService
 import com.example.patostore.presentation.CategoryViewModel
@@ -17,10 +17,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class ProductListFragment : Fragment(R.layout.fragment_product_list),
+class CategoryFragment : Fragment(R.layout.fragment_category),
     ProductAdapter.OnItemClickListener {
 
-    lateinit var binding: FragmentProductListBinding
+    lateinit var binding: FragmentCategoryBinding
     private val viewModel by viewModels<CategoryViewModel> {
         CategoryViewModelFactory(getRetrofit().create(ProductService::class.java))
     }
@@ -28,7 +28,7 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentProductListBinding.bind(view)
+        binding = FragmentCategoryBinding.bind(view)
 
         binding.bSearch.setOnClickListener {
             Log.d("pato", "se presiono el boton")
@@ -41,7 +41,7 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list),
 
         viewModel.highlightProductList.observe(viewLifecycleOwner, Observer {
 
-            val adapter = ProductAdapter(it, this@ProductListFragment)
+            val adapter = ProductAdapter(it, this@CategoryFragment)
             Log.d("pato", "la lista es ${it.toString()}")
             binding.rvProducts.adapter = adapter
         })
@@ -55,7 +55,7 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list),
     }
 
     override fun onItemClick(item: ProductApiResponse) {
-        val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
+        val action = CategoryFragmentDirections.actionProductListFragmentToProductDetailsFragment(
                 item.body.catalog_product_id
             )
         findNavController().navigate(action)
