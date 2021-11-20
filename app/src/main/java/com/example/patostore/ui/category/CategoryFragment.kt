@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.example.patostore.presentation.CategoryViewModelFactory
 import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 
 class CategoryFragment : Fragment(R.layout.fragment_category),
@@ -32,14 +34,19 @@ class CategoryFragment : Fragment(R.layout.fragment_category),
 
         binding = FragmentCategoryBinding.bind(view)
 
-        binding.bSearch.setOnClickListener {
-            Log.d("pato", "se presiono el boton")
-            viewModel.searchCategory(binding.etQuery.text.toString())
-        }
+        binding.etQuery.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { viewModel.searchCategory(it) }
+                return true
+            }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
 
-        binding.tvResult.setOnClickListener {
-            findNavController().navigate(R.id.action_productListFragment_to_favoriteFragment)
-        }
+        viewModel.foundedCategory.observe(viewLifecycleOwner, Observer {
+            binding.tvCategory.text = it?.category_name
+        })
 
         viewModel.highlightProductList.observe(viewLifecycleOwner, Observer {
 
