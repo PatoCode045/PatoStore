@@ -56,8 +56,7 @@ class ProductListFragment : Fragment(R.layout.fragment_product_list),
 
     override fun onItemClick(item: ProductApiResponse) {
         val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
-                item.body.title,
-                item.body.id
+                item.body.catalog_product_id
             )
         findNavController().navigate(action)
     }

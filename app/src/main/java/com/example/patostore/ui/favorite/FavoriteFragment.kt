@@ -55,8 +55,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), FavoriteAdapter.O
 
     override fun onItemClick(item: ProductApiResponse) {
         val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(
-            item.body.title,
-            item.body.id
+            item.body.catalog_product_id
         )
         findNavController().navigate(action)
     }

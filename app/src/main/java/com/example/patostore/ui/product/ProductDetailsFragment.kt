@@ -42,7 +42,12 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
         viewModel.fetchFavoriteList(gson.fromJson<List<String>>(list, listType)?: listOf())
 
         binding = FragmentProductDetailsBinding.bind(view)
-        binding.tvTest.text = args.title
+
+        viewModel.getDetails(args.id)
+
+        viewModel.productDetails.observe(viewLifecycleOwner, Observer {
+            binding.tvTest.text = it.name
+        })
 
         binding.bInsertIntoFavorites.setOnClickListener {
             viewModel.insertIntoFavorite( args.id )

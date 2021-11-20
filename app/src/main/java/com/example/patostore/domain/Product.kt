@@ -4,7 +4,8 @@ data class Product(
     val id: String,
     val title: String,
     val secure_thumbnail: String,
-    var position: Int
+    var position: Int,
+    val catalog_product_id: String
 )
 
 data class ProductApiResponse(

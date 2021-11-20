@@ -35,11 +35,11 @@ interface ProductService {
     @GET("/items")
     suspend fun getProductList(@Query("ids") productIdList: String): Response<List<ProductApiResponse>> //Response<Any> //
 
-/*
+
     //Function that by getting a product id returns the details of that particular product
     @Headers("Authorization: Bearer ${API_KEY}")
     @GET("/products/{PRODUCT_ID}")
     suspend fun getProductById(@Path("PRODUCT_ID")productId:String): Response<Details>
-*/
+
 
 }
