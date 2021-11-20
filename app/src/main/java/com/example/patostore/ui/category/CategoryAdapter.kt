@@ -19,7 +19,7 @@ class ProductAdapter(val productList: List<ProductApiResponse>, val itemClickLis
         val binding = ViewHolderProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val viewHolder = ProductViewHolder(binding)
 
-        binding.bShowProduct.setOnClickListener {
+        binding.cvProduct.setOnClickListener {
             val position = viewHolder.adapterPosition
             itemClickListener.onItemClick(
                 productList.find {
@@ -35,7 +35,6 @@ class ProductAdapter(val productList: List<ProductApiResponse>, val itemClickLis
         it.body.position.equals(position + 1)
     }?: ProductApiResponse(0, Product("", "", "", 0, "", 0, "",  listOf())) )
 
-
     override fun getItemCount(): Int = productList.size
 
 }
@@ -43,7 +42,9 @@ class ProductAdapter(val productList: List<ProductApiResponse>, val itemClickLis
 class ProductViewHolder(val binding: ViewHolderProductBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(productApiResponse: ProductApiResponse){
-        binding.tvProductName.text = "${productApiResponse.body.position} - ${productApiResponse.body.title}"
+        binding.tvPosition.text = productApiResponse.body.position.toString()
+        binding.tvProductName.text = productApiResponse.body.title
+        binding.tvProductPrice.text = "$ ${productApiResponse.body.price}(${productApiResponse.body.currency_id})"
         Picasso.get().load(productApiResponse.body.secure_thumbnail).into(binding.ivProductImage)
     }
 }

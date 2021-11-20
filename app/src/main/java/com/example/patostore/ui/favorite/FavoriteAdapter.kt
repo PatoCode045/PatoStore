@@ -17,7 +17,7 @@ class FavoriteAdapter(val productList: List<ProductApiResponse>, val itemClickLi
         val binding = ViewHolderProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         val viewHolder = FavoriteViewHolder(binding)
 
-        binding.bShowProduct.setOnClickListener {
+        binding.cvProduct.setOnClickListener {
             val position = viewHolder.adapterPosition
             itemClickListener.onItemClick(
                 productList[position]
@@ -37,7 +37,8 @@ class FavoriteAdapter(val productList: List<ProductApiResponse>, val itemClickLi
 class FavoriteViewHolder(val binding: ViewHolderProductBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(productApiResponse: ProductApiResponse){
-        binding.tvProductName.text = "${productApiResponse.body.title}"
+        binding.tvProductName.text = productApiResponse.body.title
+        binding.tvProductPrice.text = "$ ${productApiResponse.body.price}(${productApiResponse.body.currency_id})"
         Picasso.get().load(productApiResponse.body.secure_thumbnail).into(binding.ivProductImage)
     }
 }

@@ -2,35 +2,63 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvProduct"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="32dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivProductImage"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="0dp"
+            android:layout_height="256dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toTopOf="@+id/tvProductName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/yellow_500"
+            app:layout_constraintBottom_toBottomOf="@+id/ivProductImage"
+            app:layout_constraintStart_toStartOf="@+id/ivProductImage" />
 
         <TextView
             android:id="@+id/tvProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="TextView" />
+            android:layout_marginTop="8dp"
+            android:text="name: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivProductImage" />
 
-        <Button
-            android:id="@+id/bShowProduct"
+        <TextView
+            android:id="@+id/tvProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Button" />
-    </LinearLayout>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="price:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/blue_700"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
