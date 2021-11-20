@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.PatoStore" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/yellow_400</item>
+        <item name="colorPrimary">@color/yellow_500</item>
         <item name="colorPrimaryVariant">@color/yellow_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
