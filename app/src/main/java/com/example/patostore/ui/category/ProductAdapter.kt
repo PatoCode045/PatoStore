@@ -43,7 +43,7 @@ class ProductViewHolder(val binding: ViewHolderProductBinding): RecyclerView.Vie
 
     fun bind(productApiResponse: ProductApiResponse){
         binding.tvProductName.text = "${productApiResponse.body.position} - ${productApiResponse.body.title}"
-        Picasso.get().load(productApiResponse.body.thumbnail).into(binding.ivProductImage)
+        Picasso.get().load(productApiResponse.body.secure_thumbnail).into(binding.ivProductImage)
 
     }
 }

@@ -3,7 +3,7 @@ package com.example.patostore.domain
 data class Product(
     val id: String,
     val title: String,
-    val thumbnail: String,
+    val secure_thumbnail: String,
     var position: Int
 )
 
