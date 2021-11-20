@@ -25,6 +25,17 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <argument
+            android:name="catalog_product_id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument android:name="price" />
+        <argument
+            android:name="pictures"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"

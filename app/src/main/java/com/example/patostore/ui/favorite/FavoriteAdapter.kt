@@ -39,6 +39,5 @@ class FavoriteViewHolder(val binding: ViewHolderProductBinding): RecyclerView.Vi
     fun bind(productApiResponse: ProductApiResponse){
         binding.tvProductName.text = "${productApiResponse.body.title}"
         Picasso.get().load(productApiResponse.body.secure_thumbnail).into(binding.ivProductImage)
-
     }
 }

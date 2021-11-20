@@ -11,10 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.patostore.R
 import com.example.patostore.databinding.FragmentFavoriteBinding
 import com.example.patostore.domain.ProductApiResponse
-import com.example.patostore.network.ProductService
+import com.example.patostore.network.Service
 import com.example.patostore.presentation.FavoriteViewModel
 import com.example.patostore.presentation.FavoriteViewModelFactory
-import com.example.patostore.ui.category.ProductListFragmentDirections
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Retrofit
@@ -24,7 +23,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), FavoriteAdapter.O
 
     lateinit var binding: FragmentFavoriteBinding
     private val viewModel by viewModels<FavoriteViewModel> {
-        FavoriteViewModelFactory(getRetrofit().create(ProductService::class.java))
+        FavoriteViewModelFactory(getRetrofit().create(Service::class.java))
     }
 
     val gson = Gson()
@@ -55,7 +54,11 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite), FavoriteAdapter.O
 
     override fun onItemClick(item: ProductApiResponse) {
         val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductDetailsFragment(
-            item.body.catalog_product_id
+            item.body.id,
+            item.body.catalog_product_id,
+            item.body.title,
+            "$ ${item.body.price}(${item.body.currency_id})",
+            gson.toJson(item.body.pictures)
         )
         findNavController().navigate(action)
     }

@@ -10,9 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.patostore.R
 import com.example.patostore.databinding.FragmentCategoryBinding
 import com.example.patostore.domain.ProductApiResponse
-import com.example.patostore.network.ProductService
+import com.example.patostore.network.Service
 import com.example.patostore.presentation.CategoryViewModel
 import com.example.patostore.presentation.CategoryViewModelFactory
+import com.google.gson.Gson
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,8 +23,9 @@ class CategoryFragment : Fragment(R.layout.fragment_category),
 
     lateinit var binding: FragmentCategoryBinding
     private val viewModel by viewModels<CategoryViewModel> {
-        CategoryViewModelFactory(getRetrofit().create(ProductService::class.java))
+        CategoryViewModelFactory(getRetrofit().create(Service::class.java))
     }
+    val gson = Gson()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +58,11 @@ class CategoryFragment : Fragment(R.layout.fragment_category),
 
     override fun onItemClick(item: ProductApiResponse) {
         val action = CategoryFragmentDirections.actionProductListFragmentToProductDetailsFragment(
-                item.body.catalog_product_id
+            item.body.id,
+            item.body.catalog_product_id,
+            item.body.title,
+            "$ ${item.body.price}(${item.body.currency_id})",
+            gson.toJson(item.body.pictures)
             )
         findNavController().navigate(action)
     }

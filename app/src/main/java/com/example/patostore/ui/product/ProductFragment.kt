@@ -12,7 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.patostore.R
 import com.example.patostore.databinding.FragmentProductBinding
-import com.example.patostore.network.ProductService
+import com.example.patostore.domain.Picture
+import com.example.patostore.network.Service
 import com.example.patostore.presentation.ProductViewModel
 import com.example.patostore.presentation.ProductViewModelFactory
 import com.google.gson.Gson
@@ -29,7 +30,7 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
 
 
     private val viewModel by viewModels<ProductViewModel> {
-        ProductViewModelFactory(getRetrofit().create(ProductService::class.java))
+        ProductViewModelFactory(getRetrofit().create(Service::class.java))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,14 +40,27 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         val list = sharedPref?.getString("list", "")?:""
         val listType = object : TypeToken<List<String>>() { }.type
         Log.d("pato", "se cargo la lista: ${list}")
-        viewModel.fetchFavoriteList(gson.fromJson<List<String>>(list, listType)?: listOf())
+        viewModel.fetchFavoriteList(gson.fromJson(list, listType))
 
         binding = FragmentProductBinding.bind(view)
 
-        viewModel.getDetails(args.id)
+        binding.tvTitle.text = args.title
+        binding.tvPrice.text = args.price
+
+        val pictureListType = object : TypeToken<List<Picture>>() { }.type
+        val adapter = CarouselAdapter(gson.fromJson(args.pictures, pictureListType))
+        binding.rvCarousel.adapter = adapter
+
+        args.catalogProductId?.let { viewModel.getDetails(it) }
 
         viewModel.productDetails.observe(viewLifecycleOwner, Observer {
-            binding.tvTest.text = it.name
+            if (it.name.isNotEmpty()){
+                var atributes = ""
+                it.attributes.forEach {
+                    atributes = "${atributes}\n${it.name}: ${it.value_name}"
+                }
+                binding.tvDetails.text = "${it.name}:\n${atributes}"
+            }
         })
 
         binding.bInsertIntoFavorites.setOnClickListener {

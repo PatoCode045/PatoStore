@@ -7,7 +7,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-const val API_KEY = "APP_USR-2169244178895327-112012-c9bc48214325d73fac493b35dbf47015-144464632"
+const val API_KEY = "APP_USR-2169244178895327-112019-7bfec2cde0dae2c0381c4be86cdc52c1-144464632"
 interface Service {
 
     //Function that accepts a COUNTRY_ID(MLA, MLC, MLO..) and a query to predict a possible
